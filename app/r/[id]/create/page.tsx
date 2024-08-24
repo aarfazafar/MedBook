@@ -75,6 +75,7 @@ export default function createPost({ params }: { params: { id: string }}) {
               <form action={createPostFunction}>
                 <input type="hidden" value={imageUrl ?? undefined} name="imageUrl"/>
                 <input type="hidden" name="subName" value={params.id}/>
+                <input type="hidden" name="id" value={params.id}/>
                 <CardHeader>
                   <Input required placeholder="Title" name="title" value={title ?? undefined} onChange={(e) => setTitle(e.target.value)}/>
                   <Tiptap setJson={setJson} json={json}/>

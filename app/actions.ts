@@ -124,9 +124,10 @@ export async function createPostAction({jsonContent} : {jsonContent: JSONContent
   const title = formData.get("title") as string
   const imageUrl = formData.get("imageUrl") as string | null
   const subName = formData.get("subName") as string
+  const id = formData.get("id") as string
   await prisma.post.create({
     data: {
-      id: user.id,
+      id: id,
       title: title,
       textContent: jsonContent ?? undefined,
       imageString: imageUrl ?? undefined,
