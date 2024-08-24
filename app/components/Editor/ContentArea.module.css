@@ -1,0 +1,39 @@
+.heading1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+.heading2 {
+  @apply text-3xl font-semibold mb-3;
+}
+
+.heading3 {
+  @apply text-2xl font-medium mb-2;
+}
+/* Code block styles */
+.codeBlock {
+  @apply bg-gray-50 text-gray-800 p-4 rounded-md overflow-x-auto font-mono;
+}
+
+/* Inline code styles */
+.inlineCode {
+  @apply bg-gray-200 text-gray-800 px-1 py-0.5 rounded-md font-mono text-sm;
+}
+
+/* Highlighted text styles */
+.highlightedText {
+  @apply bg-yellow-300 text-black px-1 py-0.5 rounded-md;
+}
+
+/* Link styles */
+.link {
+  @apply text-blue-500 underline; /* Blue, underlined links */
+}
+
+/* Bullet list styles */
+.bulletList {
+  @apply list-disc pl-5; /* Disc bullets with padding */
+}
+
+.bulletItem {
+  @apply mb-1; /* Margin between list items */
+}

@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+}
+
+model User{
+  id String @id 
+  email     String   @unique
+  password  String?
+  firstName String
+  lastName String
+  imageUrl String?
+  userName String? @unique
+  createdSubreddits Subreddit[]
+  createdAt DateTime  @default(now())
+  post Post[]
+   votes Vote[]
+  comments Comment[]
+}
+
+model Subreddit {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?
+  post        Post[]
+}
+
+enum TypePost {
+  IMAGE
+  VIDEO
+  POST
+}
+
+model Post {
+  id          String  @id @default(uuid())
+  title       String
+  textContent Json?
+  imageString String?
+  type        TypePost
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  Subreddit   Subreddit? @relation(fields: [subName], references: [name])
+  subName     String?
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?
+  Image       Image[]
+  Video       Video[]
+  votes    Vote[]
+  comments Comment[]
+
+}
+
+model Image {
+  id      String   @id @default(uuid())
+  url     String
+  description String?
+  postId      String
+  Post        Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Video {
+  id      String @id @default(uuid())
+  url     String
+  description String?
+  postId      String
+  Post        Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+enum TypeOfVote {
+  UP
+  DOWN
+}
+
+model Vote {
+  id String @id @default(uuid())
+
+  Post   Post?   @relation(fields: [postId], references: [id])
+  postId String?
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  voteType TypeOfVote
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  text      String
+  createdAt DateTime @default(now())
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+  Post   Post?   @relation(fields: [postId], references: [id])
+  postId String?
+}
