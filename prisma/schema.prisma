@@ -47,7 +47,7 @@ enum TypePost {
 }
 
 model Post {
-  id          String  @id @default(uuid())
+  id          String  @id @unique @default(uuid())
   title       String
   textContent Json?
   imageString String?
