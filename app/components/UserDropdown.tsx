@@ -4,6 +4,8 @@ import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import {LogoutLink} from '@kinde-oss/kinde-auth-nextjs/components'
 import { Separator } from "./ui/separator";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/dist/server/api-utils";
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface props{
@@ -11,8 +13,9 @@ interface props{
     username?: string | null;
 }
 export default async function({userImage, username}: props){
-    // const {getUser} = getKindeServerSession();
-    // const user = await getUser()
+    const {getUser} = getKindeServerSession();
+    const user = await getUser()
+    
     return(
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -27,7 +30,7 @@ export default async function({userImage, username}: props){
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[200px]">
                 <DropdownMenuItem className="w-full">
-                    <Link href="/" className="w-full">{username}</Link>
+                    <Link href="/" className="w-full">{user?.username}</Link>
                 </DropdownMenuItem>
                   <Separator className="my-4" />
                 <DropdownMenuItem className="w-full">

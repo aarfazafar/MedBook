@@ -110,7 +110,7 @@ export default function createPost({ params }: { params: { id: string }}) {
         Guidelines
         <Card className="flex flex-col p-4">
           <div className="flex items-center gap-x-1">
-            <Image className="h-6 w-20" src={logo} alt="pfp" />
+            <Image className="h-6 w-6" src={logo} alt="pfp" />
             <h4 className="font-sm">Posting to Medbook</h4>
           </div>
           <Separator />

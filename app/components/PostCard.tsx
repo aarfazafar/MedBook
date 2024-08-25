@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CopyLink } from "./CopyLink";
 import { handleVote } from "../actions";
 import { DownVote, UpVote } from "./SubmitButtons";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 // import { RenderToJson } from "./RendertoJson";
 
 interface iAppProps {
@@ -20,7 +21,7 @@ interface iAppProps {
   commentAmount: number;
 }
 
-export function PostCard({
+export async function PostCard({
   id,
   imageString,
   jsonContent,
@@ -30,6 +31,8 @@ export function PostCard({
   voteCount,
   commentAmount,
 }: iAppProps) {
+  const {getUser} = getKindeServerSession();
+  const user = await getUser()
   return (
     <Card className="flex relative overflow-hidden">
       <div className="flex flex-col items-center gap-y-2 bg-muted p-2">
@@ -52,7 +55,7 @@ export function PostCard({
             r/{subName}
           </Link>
           <p className="text-xs text-muted-foreground">
-            Posted by: <span className="hover:text-primary">u/{userName}</span>
+            Posted by: <span className="hover:text-primary">{`u/${user?.id}`}</span>
           </p>
         </div>
 

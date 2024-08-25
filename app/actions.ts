@@ -127,11 +127,10 @@ export async function createPostAction({jsonContent} : {jsonContent: JSONContent
   const id = formData.get("id") as string
   await prisma.post.create({
     data: {
-      id: id,
       title: title,
       textContent: jsonContent ?? undefined,
       imageString: imageUrl ?? undefined,
-      type: TypePost.IMAGE || TypePost.POST || TypePost.VIDEO
+      type: TypePost.POST || TypePost.VIDEO || TypePost.IMAGE
     }
   });
   return redirect("/")

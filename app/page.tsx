@@ -85,7 +85,7 @@ export default function Home({
               <h1 className="font-medium pl-3">Home</h1>
             </div>
             <p className="text-sm text-muted-foreground pt-2">
-              Your Home Reddit frontpage. Come here to check in with your
+              Welcome to Your Home. Come here to check in with your
               favorite communites!
             </p>
             <Separator className="my-5" />
