@@ -17,7 +17,6 @@ interface iAppProps {
   userName: string;
   imageString: string | null;
   voteCount: number;
-
   commentAmount: number;
 }
 
@@ -55,7 +54,7 @@ export async function PostCard({
             r/{subName}
           </Link>
           <p className="text-xs text-muted-foreground">
-            Posted by: <span className="hover:text-primary">{`u/${user?.id}`}</span>
+            Posted by: <span className="hover:text-primary">{`/u${user?.given_name}`}</span>
           </p>
         </div>
 
@@ -67,14 +66,17 @@ export async function PostCard({
 
         <div className="max-h-[300px] overflow-hidden">
           {/* {imageString ? ( */}
+          {imageString? (
             <Image
-              // src={imageString}
-              src={image}
+              src={imageString || image}
+              // src={image}
               alt="Post Image"
               width={600}
               height={300}
               className="w-full h-full"
             />
+          ) :
+          undefined}
           {/* )  */}
           {/* : (
             <RenderToJson data={jsonContent} />

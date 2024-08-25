@@ -124,9 +124,9 @@ export async function createPostAction({jsonContent} : {jsonContent: JSONContent
   const title = formData.get("title") as string
   const imageUrl = formData.get("imageUrl") as string | null
   const subName = formData.get("subName") as string
-  const id = formData.get("id") as string
   await prisma.post.create({
     data: {
+      User: {},
       title: title,
       textContent: jsonContent ?? undefined,
       imageString: imageUrl ?? undefined,
@@ -178,7 +178,7 @@ export async function handleVote(formData: FormData) {
   await prisma.vote.create({
     data: {
       voteType: voteDirection,
-      userId: user.id,
+      // userId: user.id,
       postId: postId,
     },
   });
