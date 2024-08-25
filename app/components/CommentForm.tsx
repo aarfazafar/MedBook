@@ -14,7 +14,7 @@ export function CommentForm({ postId }: iAppProps) {
   const ref = useRef<HTMLFormElement>(null);
   return (
     <form
-      className="mt-5"
+      className="mx-5 mb-5"
       action={async (formData) => {
         await createComment(formData);
         ref.current?.reset();
@@ -25,10 +25,10 @@ export function CommentForm({ postId }: iAppProps) {
       <Label>Comment right here</Label>
       <Textarea
         placeholder="What are your thoughts?"
-        className="w-full mt-1 mb-2"
+        className="min-w-80 mt-1 mb-2 ml"
         name="comment"
       />
-      <SubmitButton text="Comment" />
+      <SubmitButton text="Comment"/>
     </form>
   );
 }

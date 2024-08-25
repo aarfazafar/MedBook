@@ -63,13 +63,13 @@ export async function createCommunity(prevState: any, formData: FormData) {
     const data = await prisma.subreddit.create({
       data:{
         name: name,
-        id: user.id,
+        // id: user.id,
       }
     })
     return redirect ("/")
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === "P2002") {
+      if (e.code === "P2001") {
         return {
           message: "This community name is already used",
           status: "error",
@@ -189,7 +189,6 @@ export async function handleVote(formData: FormData) {
 export async function createComment(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-
   if (!user) {
     return redirect("/api/auth/login");
   }
@@ -200,7 +199,7 @@ export async function createComment(formData: FormData) {
   const data = await prisma.comment.create({
     data: {
       text: comment,
-      userId: user.id,
+      // userId: user.id,
       postId: postId,
     },
   });

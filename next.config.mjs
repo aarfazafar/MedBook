@@ -3,8 +3,8 @@ import { hostname } from 'os';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // domains: ['lh3.googleusercontent.com'],
-    domains: ['utfs.io'],
+    domains: ['lh3.googleusercontent.com', 'utfs.io'],
+    // domains: [],
     remotePatterns: [
     {
       hostname: "avatar.vercel.sh",

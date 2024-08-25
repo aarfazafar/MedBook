@@ -7,6 +7,7 @@ import { CopyLink } from "./CopyLink";
 import { handleVote } from "../actions";
 import { DownVote, UpVote } from "./SubmitButtons";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { CommentForm } from "./CommentForm";
 // import { RenderToJson } from "./RendertoJson";
 
 interface iAppProps {
@@ -32,7 +33,30 @@ export async function PostCard({
 }: iAppProps) {
   const {getUser} = getKindeServerSession();
   const user = await getUser()
+
+  function extractText(jsonContent: { content: any[]; }) {
+    let text = "";
+  
+    if (jsonContent.content) {
+      jsonContent.content.forEach(paragraph => {
+        if (paragraph.content) {
+          paragraph.content.forEach((node: { type: string; text: string; }) => {
+            if (node.type === "text") {
+              text += node.text;
+            }
+          });
+        }
+        // Add a newline after each paragraph if needed
+        text += "\n";
+      });
+    }
+  
+    return text.trim(); // Remove any leading/trailing whitespace
+  }
+  
+  const finalText = extractText(jsonContent);
   return (
+    // <div className="flex flex-col">
     <Card className="flex relative overflow-hidden">
       <div className="flex flex-col items-center gap-y-2 bg-muted p-2">
         <form action={handleVote}>
@@ -48,6 +72,8 @@ export async function PostCard({
         </form>
       </div>
 
+
+      <div className="flex flex-col">
       <div>
         <div className="flex items-center gap-x-2 p-2">
           <Link className="font-semibold text-xs" href={`/r/${subName}`}>
@@ -81,6 +107,9 @@ export async function PostCard({
           {/* : (
             <RenderToJson data={jsonContent} />
           )} */}
+          <p className="mx-5 mt-5 text-sm">
+          {finalText}
+          </p>
         </div>
 
         <div className="m-3 flex items-center gap-x-5">
@@ -94,6 +123,12 @@ export async function PostCard({
           <CopyLink id={id} />
         </div>
       </div>
+    {/* <div className="w-full" > */}
+    <CommentForm postId={id }/>
+    {/* </div> */}
+      </div>
     </Card>
+    // </div>
   );
 }
+
