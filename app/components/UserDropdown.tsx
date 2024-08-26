@@ -6,13 +6,14 @@ import {LogoutLink} from '@kinde-oss/kinde-auth-nextjs/components'
 import { Separator } from "./ui/separator";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/dist/server/api-utils";
+import Image from "next/image";
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface props{
     userImage: string | null;
     username?: string | null;
 }
-export default async function({userImage, username}: props){
+const UserDropdown =  async function({userImage, username}: props){
     const {getUser} = getKindeServerSession();
     const user = await getUser()
     
@@ -21,7 +22,7 @@ export default async function({userImage, username}: props){
             <DropdownMenuTrigger>
                 <div className="rounded-full border px-2 py-2 lg:px-4 lg:py-2 flex gap-x-3 items-center">
                     <MenuIcon className="w-6 h-6 lg:w-5 lg:h-5"/>
-                    <img 
+                    <Image 
                         src={userImage ?? "https://th.bing.com/th/id/OIP.PoS7waY4-VeqgNuBSxVUogAAAA?rs=1&pid=ImgDetMain"} 
                         alt="avatar" 
                         className="rounded-full w-8 h-8 hidden lg:block"
@@ -58,3 +59,5 @@ export default async function({userImage, username}: props){
         </DropdownMenu>
     )
 }
+
+export default UserDropdown;

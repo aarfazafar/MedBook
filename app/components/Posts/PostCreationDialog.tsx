@@ -29,6 +29,7 @@ import { TypePost } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { Textarea } from '../ui/textarea'
+import Image from 'next/image'
 
 type Props = {
     title:string
@@ -225,7 +226,7 @@ const PostCreationDialogue = ({title, typePost, openDialgoue, setOpenDialogue}: 
                                             <CarouselItem key={index} className='relative'>
                                                 {files[index].type.startsWith('image/') ? (
                                                     <>
-                                                    <img src={url} alt={files[index].name} />
+                                                    <Image src={url} alt={files[index].name} />
                                                     {typePost === TypePost.IMAGE && (
                                                         <Textarea 
                                                             value={description[index]}

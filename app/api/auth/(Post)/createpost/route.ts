@@ -36,9 +36,9 @@ export async function POST(request: NextRequest){
             const NewPost = await prisma.post.create({
                 data:{
                     title: body.title, 
-                    content,
-                    authorId:User.id,
-                    tags,
+                    textContent: body.content,
+                    id:User.id,
+                    // tags,
                     type:typePost as TypePost,
                     Image:{
                         createMany:{

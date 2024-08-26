@@ -5,6 +5,7 @@ import { Button } from "@/app/components/ui/button";
 import { Card } from "@/app/components/ui/card";
 import { Separator } from "@/app/components/ui/separator";
 import { Textarea } from "@/app/components/ui/textarea";
+import image from '../../assets/image.png'
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
@@ -45,7 +46,7 @@ export default async function communityRoute({
           <div className="p-4">
             <div className="flex items-center gap-x-3">
               <Image
-                src={user?.picture}
+                src={user?.picture || image}
                 alt="Community image"
                 width={60}
                 height={60}

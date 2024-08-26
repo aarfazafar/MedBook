@@ -1,5 +1,4 @@
 "use client"
-
 import Image from "next/image";
 import logo from "../../../assets/textLogo.svg";
 import { Card, CardFooter, CardHeader } from "@/app/components/ui/card";
@@ -42,7 +41,7 @@ const rules = [
     text: "Lorem ipsum dolor sit amet",
   },
 ];
-export default function createPost({ params }: { params: { id: string }}) {
+const CreatePost = function ({ params }: { params: { id: string }}) {
   const [imageUrl, setImageUrl] = useState<null | string>(null)
   const [json, setJson] = useState<null | JSONContent>(null)
   const [title, setTitle] = useState<null | string>(null)
@@ -130,6 +129,7 @@ export default function createPost({ params }: { params: { id: string }}) {
   );
 }
 
+export default CreatePost
 // // import next from "../../../../public/next.svg";
 // // import logo from '../../../assets/textLogo.svg'
 // import logo from '../../../assets/image.png'
